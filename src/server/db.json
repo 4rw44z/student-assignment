@@ -1,31 +1,5 @@
 {
   "students": [
-    {
-      "$key": null,
-      "name": "Test",
-      "email": "arwazjamal@gmail.com",
-      "mobile": "9899999999",
-      "dob": "2010-04-01T18:30:00.000Z",
-      "gender": "Female",
-      "id": 1
-    },
-    {
-      "$key": null,
-      "name": "Test",
-      "email": "arwazjamal@gmail.com",
-      "mobile": "9899999999",
-      "dob": "2010-04-01T18:30:00.000Z",
-      "gender": "Female",
-      "id": 2
-    },
-    {
-      "$key": null,
-      "name": "tastte",
-      "email": "arwazjamal@gmail.com",
-      "mobile": "9899999999",
-      "dob": "2010-04-01T18:30:00.000Z",
-      "gender": "male",
-      "id": 3
-    }
+    
   ]
 }

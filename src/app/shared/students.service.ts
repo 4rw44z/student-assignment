@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {FormGroup, FormControl, Validators } from '@angular/forms';
+let uuid = 0;
 @Injectable({
   providedIn: 'root'
 })
 export class StudentsService {
-  public uuid = 0; 
-
   constructor(private _http: HttpClient) { }
   studentForm: FormGroup = new FormGroup({
     id: new FormControl(null),
@@ -29,8 +28,8 @@ export class StudentsService {
   };
 
   public onFormSubmit(data) {
-    this.uuid++;
-    const dataObject = {...data, id: this.uuid}
+    uuid++;
+    const dataObject = {...data, id: uuid}
    return this._http.post("http://localhost:3000/students", dataObject);  
   }
   public getAllUser() {
