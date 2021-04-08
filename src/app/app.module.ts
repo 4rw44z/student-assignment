@@ -6,7 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentComponent } from './student/student.component';
 import { MaterialModule } from './material/material.module';
 import { BasicInfoComponent } from './student/basic-info/basic-info.component';
-
+import { StudentsService } from './shared/students.service';
+import {HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,9 +17,10 @@ import { BasicInfoComponent } from './student/basic-info/basic-info.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [StudentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
