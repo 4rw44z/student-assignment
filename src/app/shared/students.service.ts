@@ -11,7 +11,7 @@ export class StudentsService {
     id: new FormControl(null),
     name: new FormControl('', [Validators.required, Validators.maxLength(56), Validators.pattern('^[a-zA-Z ]*$')]),
     email: new FormControl('', [Validators.required, Validators.maxLength(112) , Validators.email]),
-    mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+    mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]),
     dob: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
     gender: new FormControl('', [Validators.required, Validators.maxLength(12), Validators.pattern('^[a-zA-Z ]*$')])
   });

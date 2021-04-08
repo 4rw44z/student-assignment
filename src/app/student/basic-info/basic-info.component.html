@@ -12,19 +12,21 @@
                         </mat-form-field>
                         <mat-form-field>
                             <input formControlName="email" matInput placeholder="Enter email" email>
-                            <mat-error *ngIf="studentservice.studentForm.controls['email']?.errors?.maxLength">email should be less than 112 words</mat-error>
+                            <mat-error *ngIf="studentservice.studentForm.controls['email'].errors?.maxLength">email should be less than 112 words</mat-error>
                             <mat-error>Invalid email</mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <input formControlName="mobile" matInput placeholder="Enter Mobile">
-                            <mat-error *ngIf="studentservice.studentForm.controls['mobile']?.errors?.required">The field is required</mat-error>
-                            <mat-error *ngIf="studentservice.studentForm.controls['mobile']?.errors?.maxLength">Number should be less than 10 digits</mat-error>
-                            <mat-error *ngIf="studentservice.studentForm.controls['mobile']?.errors?.minLength">Number should be atleast 10 digits</mat-error>
+                            <mat-error *ngIf="studentservice.studentForm.controls['mobile'].errors?.required">The field is required</mat-error>
+                            <mat-error *ngIf="studentservice.studentForm.controls['mobile'].errors?.maxLength">Number should be less than 10 digits</mat-error>
+                            <mat-error *ngIf="studentservice.studentForm.controls['mobile'].errors?.minLength">Number should be atleast 10 digits</mat-error>
+                            <mat-error *ngIf="studentservice.studentForm.controls['mobile'].errors?.pattern">Phone number should be in digits only</mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <input formControlName="dob" matInput placeholder="Enter Date of birth" [matDatepicker]="picker">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="studentservice.studentForm.controls['dob'].errors?.minLength">Invalid date</mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-select formControlName="gender" placeholder="Gender">
