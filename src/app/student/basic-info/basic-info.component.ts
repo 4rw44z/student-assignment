@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StudentsService } from 'src/app/shared/students.service';
 import * as moment from 'moment';
+import { FormGroupDirective } from '@angular/forms';
 @Component({
   selector: 'app-basic-info',
   templateUrl: './basic-info.component.html',
@@ -13,6 +14,7 @@ export class BasicInfoComponent implements OnInit {
   public displayedColumns : string[] = ['$id', 'name', 'email', 'mobile', 'dob', 'gender', 'update', 'delete']
   public studentData = {name: '', email:'', mobile: '', dob: '', gender: '' ,id: ''}
   public isEdit = false;
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
   constructor(public studentservice: StudentsService) { }
 
   ngOnInit(): void {
@@ -31,9 +33,10 @@ export class BasicInfoComponent implements OnInit {
   public onSubmit(data) {
     if(this.studentservice.studentForm.valid) {
       this.studentservice.onFormSubmit(data).subscribe((response) => {
-        console.log(response);
+        this.getLatestUser();
       });
-      this.getLatestUser();
+      setTimeout(() => 
+      this.formGroupDirective.resetForm(), 0)
     }
   }
   public getLatestUser() {

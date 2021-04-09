@@ -1,21 +1,3 @@
 {
-  "students": [
-    {
-      "id": 2,
-      "name": "Rest Delh",
-      "email": "new@email.com",
-      "mobile": "9899999998",
-      "dob": "2021-04-15T18:30:00.000Z",
-      "gender": "Male",
-      "formattedDob": "09/04/2021"
-    },
-    {
-      "id": 3,
-      "name": "new Entry",
-      "email": "new@email.com",
-      "mobile": "9899999999",
-      "dob": "2010-04-01T18:30:00.000Z",
-      "gender": "Female"
-    }
-  ]
+  "students": []
 }
