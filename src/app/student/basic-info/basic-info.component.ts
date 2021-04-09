@@ -11,6 +11,8 @@ export class BasicInfoComponent implements OnInit {
   public studentsMasterList;
   public selectedRow;
   public displayedColumns : string[] = ['$id', 'name', 'email', 'mobile', 'dob', 'gender', 'update', 'delete']
+  public studentData = {name: '', email:'', mobile: '', dob: '', gender: '' ,id: ''}
+  public isEdit = false;
   constructor(public studentservice: StudentsService) { }
 
   ngOnInit(): void {
@@ -41,7 +43,7 @@ export class BasicInfoComponent implements OnInit {
     })
   };
   public transformDataSource() {
-    this.tableDataSource = this.studentsMasterList.map(obj => {obj.dob = this.calculateDate(obj.dob)});
+    this.tableDataSource = this.studentsMasterList.map(obj => {obj.formattedDob = this.calculateDate(obj.dob)});
   }
   public calculateDate(date) {
     return moment(date).format('DD/MM/YYYY');
@@ -51,7 +53,16 @@ export class BasicInfoComponent implements OnInit {
     $event.stopPropagation();
   }
   public updateStudentData($event) {
-    console.log($event);
+    this.isEdit = true;
+    setTimeout(() => {
+      this.studentData = this.selectedRow;
+    }, 200);
+  }
+  public onUpdate(data) {
+    this.isEdit = !this.isEdit
+    this.studentservice.updateStudent(data).subscribe(() => {
+      this.getLatestUser();
+    })
   }
   deleteStudent() {
     setTimeout(() => {

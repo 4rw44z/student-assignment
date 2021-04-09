@@ -35,4 +35,7 @@ export class StudentsService {
   public deleteStudents(student) {
     return this._http.delete("http://localhost:3000/students/"+student.id);
   }
+  public updateStudent(student) {
+    return this._http.put("http://localhost:3000/students/"+student.id, student);
+  }
 }
