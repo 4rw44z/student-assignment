@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StudentsService } from 'src/app/shared/students.service';
 import * as moment from 'moment';
+import { FormGroupDirective } from '@angular/forms';
 @Component({
   selector: 'app-basic-info',
   templateUrl: './basic-info.component.html',
@@ -9,7 +10,11 @@ import * as moment from 'moment';
 export class BasicInfoComponent implements OnInit {
   public tableDataSource = [];
   public studentsMasterList;
-  public displayedColumns : string[] = ['$id', 'name', 'email', 'mobile', 'dob', 'gender']
+  public selectedRow;
+  public displayedColumns : string[] = ['$id', 'name', 'email', 'mobile', 'dob', 'gender', 'update', 'delete']
+  public studentData = {name: '', email:'', mobile: '', dob: '', gender: '' ,id: ''}
+  public isEdit = false;
+  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
   constructor(public studentservice: StudentsService) { }
 
   ngOnInit(): void {
@@ -22,15 +27,15 @@ export class BasicInfoComponent implements OnInit {
   ]
   
   public onClear() {
-    this.studentservice.studentForm.reset();
-    this.studentservice.initializeFormGroup();
+    this.formGroupDirective.resetForm();
   }
   public onSubmit(data) {
     if(this.studentservice.studentForm.valid) {
       this.studentservice.onFormSubmit(data).subscribe((response) => {
-        console.log(response);
+        this.getLatestUser();
+        this.formGroupDirective.resetForm();
       });
-      this.getLatestUser();
+     
     }
   }
   public getLatestUser() {
@@ -40,9 +45,30 @@ export class BasicInfoComponent implements OnInit {
     })
   };
   public transformDataSource() {
-    this.tableDataSource = this.studentsMasterList.map(obj => {obj.dob = this.calculateDate(obj.dob)});
+    this.tableDataSource = this.studentsMasterList.map(obj => {obj.formattedDob = this.calculateDate(obj.dob)});
   }
-  calculateDate(date) {
+  public calculateDate(date) {
     return moment(date).format('DD/MM/YYYY');
   } 
+  public highlight(row, $event) {
+    this.selectedRow = row;
+    $event.stopPropagation();
+  }
+  public updateStudentData(element) {
+    console.log(element);
+    this.isEdit = true;
+    this.studentData = element;
+  }
+  public onUpdate(data,) {
+    this.isEdit = !this.isEdit
+    this.studentservice.updateStudent(data).subscribe(() => {
+      this.getLatestUser();
+      this.formGroupDirective.resetForm();
+    })
+  }
+  deleteStudent(student) {
+      this.studentservice.deleteStudents(student).subscribe(() => {
+        this.getLatestUser();
+      })
+  }
 }

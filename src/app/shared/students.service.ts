@@ -32,4 +32,10 @@ export class StudentsService {
   public getAllUser() {
     return this._http.get("http://localhost:3000/students");
   }
+  public deleteStudents(student) {
+    return this._http.delete("http://localhost:3000/students/"+student.id);
+  }
+  public updateStudent(student) {
+    return this._http.put("http://localhost:3000/students/"+student.id, student);
+  }
 }

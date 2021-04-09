@@ -1,5 +1,21 @@
 {
   "students": [
-    
+    {
+      "id": 1,
+      "name": "arwAZ",
+      "email": "arwaz@gmail.com",
+      "mobile": "9899999999",
+      "dob": "2021-04-07T18:30:00.000Z",
+      "gender": "Female",
+      "formattedDob": "08/04/2021"
+    },
+    {
+      "id": 2,
+      "name": "Arwaz",
+      "email": "arwaz@gmail.com",
+      "mobile": "9899966311",
+      "dob": "2021-04-08T18:30:00.000Z",
+      "gender": "Female"
+    }
   ]
 }
