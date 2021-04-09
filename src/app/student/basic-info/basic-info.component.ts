@@ -27,16 +27,15 @@ export class BasicInfoComponent implements OnInit {
   ]
   
   public onClear() {
-    this.studentservice.studentForm.reset();
-    this.studentservice.initializeFormGroup();
+    this.formGroupDirective.resetForm();
   }
   public onSubmit(data) {
     if(this.studentservice.studentForm.valid) {
       this.studentservice.onFormSubmit(data).subscribe((response) => {
         this.getLatestUser();
+        this.formGroupDirective.resetForm();
       });
-      setTimeout(() => 
-      this.formGroupDirective.resetForm(), 0);
+     
     }
   }
   public getLatestUser() {
