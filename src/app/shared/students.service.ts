@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {FormGroup, FormControl, Validators } from '@angular/forms';
-let uuid = 0;
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +10,7 @@ export class StudentsService {
     id: new FormControl(null),
     name: new FormControl('', [Validators.required, Validators.maxLength(56), Validators.pattern('^[a-zA-Z ]*$')]),
     email: new FormControl('', [Validators.required, Validators.maxLength(112) , Validators.email]),
-    mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+    mobile: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]),
     dob: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
     gender: new FormControl('', [Validators.required, Validators.maxLength(12), Validators.pattern('^[a-zA-Z ]*$')])
   });
@@ -28,11 +27,15 @@ export class StudentsService {
   };
 
   public onFormSubmit(data) {
-    uuid++;
-    const dataObject = {...data, id: uuid}
-   return this._http.post("http://localhost:3000/students", dataObject);  
+   return this._http.post("http://localhost:3000/students", data);  
   }
   public getAllUser() {
     return this._http.get("http://localhost:3000/students");
+  }
+  public deleteStudents(student) {
+    return this._http.delete("http://localhost:3000/students/"+student.id);
+  }
+  public updateStudent(student) {
+    return this._http.put("http://localhost:3000/students/"+student.id, student);
   }
 }
