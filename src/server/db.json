@@ -1,5 +1,12 @@
 {
   "students": [
-    
+    {
+      "id": 2,
+      "name": "Rest Delh",
+      "email": "new@email.com",
+      "mobile": "9899999999",
+      "dob": "2021-04-08T18:30:00.000Z",
+      "gender": "Male"
+    }
   ]
 }

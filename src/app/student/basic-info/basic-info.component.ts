@@ -9,7 +9,8 @@ import * as moment from 'moment';
 export class BasicInfoComponent implements OnInit {
   public tableDataSource = [];
   public studentsMasterList;
-  public displayedColumns : string[] = ['$id', 'name', 'email', 'mobile', 'dob', 'gender']
+  public selectedRow;
+  public displayedColumns : string[] = ['$id', 'name', 'email', 'mobile', 'dob', 'gender', 'update', 'delete']
   constructor(public studentservice: StudentsService) { }
 
   ngOnInit(): void {
@@ -42,7 +43,21 @@ export class BasicInfoComponent implements OnInit {
   public transformDataSource() {
     this.tableDataSource = this.studentsMasterList.map(obj => {obj.dob = this.calculateDate(obj.dob)});
   }
-  calculateDate(date) {
+  public calculateDate(date) {
     return moment(date).format('DD/MM/YYYY');
   } 
+  public highlight(row, $event) {
+    this.selectedRow = row;
+    $event.stopPropagation();
+  }
+  public updateStudentData($event) {
+    console.log($event);
+  }
+  deleteStudent() {
+    setTimeout(() => {
+      this.studentservice.deleteStudents(this.selectedRow).subscribe(() => {
+        this.getLatestUser();
+      })
+    }, 1000)
+  }
 }
