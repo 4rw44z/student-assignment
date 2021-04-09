@@ -36,7 +36,7 @@ export class BasicInfoComponent implements OnInit {
         this.getLatestUser();
       });
       setTimeout(() => 
-      this.formGroupDirective.resetForm(), 0)
+      this.formGroupDirective.resetForm(), 0);
     }
   }
   public getLatestUser() {
@@ -55,23 +55,21 @@ export class BasicInfoComponent implements OnInit {
     this.selectedRow = row;
     $event.stopPropagation();
   }
-  public updateStudentData($event) {
+  public updateStudentData(element) {
+    console.log(element);
     this.isEdit = true;
-    setTimeout(() => {
-      this.studentData = this.selectedRow;
-    }, 200);
+    this.studentData = element;
   }
-  public onUpdate(data) {
+  public onUpdate(data,) {
     this.isEdit = !this.isEdit
     this.studentservice.updateStudent(data).subscribe(() => {
       this.getLatestUser();
+      this.formGroupDirective.resetForm();
     })
   }
-  deleteStudent() {
-    setTimeout(() => {
-      this.studentservice.deleteStudents(this.selectedRow).subscribe(() => {
+  deleteStudent(student) {
+      this.studentservice.deleteStudents(student).subscribe(() => {
         this.getLatestUser();
       })
-    }, 1000)
   }
 }
